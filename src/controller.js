@@ -5,8 +5,31 @@ import { json } from 'stream/consumers'
 export class Controller {
     constructor(){}
 
-    async getExpenseLog(req, res) {
-        res.status(201).send("getExpenseLog")
+    async getExpenseLogById(req, res) {
+        const bodySchema = z.object({id: z.number("Insira um ID válido.")})
+
+        try {
+            const expenseLogData = bodySchema.parse(req.body)
+            const expenseLog = await service.getExpenseLogById(expenseLogData.id)
+    
+            res.status(201).send(`Registro ${expenseLog.id}`)
+        } catch(err) {
+            res.status(400).send(err.message)
+        }
+    }
+
+    async getMonthExpenseLog(req, res) {
+        const monthExpenses = await service.getMonthExpenseLog()
+
+        try {
+            if (monthExpenses.length == 0) {
+                res.status(200).send("Nenhum registro encontrado.")
+                return
+            }
+            res.status(200).send(`${monthExpenses.length} registros encontrados.`)
+        } catch(err) {
+            res.status(400).send(err.message)
+        }
     }
 
     async createExpenseLog(req, res) {
@@ -20,13 +43,11 @@ export class Controller {
       
         try {
             const expenseLogData = bodySchema.parse(req.body)
-
             const expenseLog = await service.createExpenseLog(expenseLogData)
 
             res.status(201).send(`Registro ${expenseLog.id} realizado com sucesso.`)
-
         } catch (err) {
-            console.log(err)
+            res.status(400).send(err.message)
           }
     }
 
@@ -40,11 +61,9 @@ export class Controller {
             const categoryData = bodySchema.parse(req.body)
             const category = await service.createCategory(categoryData)
 
-
             res.status(201).send(`Categoria "${category.name}" criada com sucesso com ID: ${category.id}.`)
-
         } catch(err) {
-            console.log(err)
+            res.status(400).send(err.message)
         }
     }
 
@@ -57,11 +76,9 @@ export class Controller {
             const paymentTypeData = bodySchema.parse(req.body)
             const paymentType = await service.createPaymentType(paymentTypeData)
 
-
             res.status(201).send(`Tipo de pagamento "${paymentType.type}" criado com sucesso com ID: ${paymentType.id}.`)
-
         } catch(err) {
-            console.log(err)
+            res.status(400).send(err.message)
         }
     }
 }

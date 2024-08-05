@@ -6,20 +6,13 @@ const routes = express.Router()
 
 app.use(express.json())
 
-routes.get('/despesas', controller.getExpenseLog)
-routes.post('/despesas', controller.createExpenseLog)
+routes.get('/api/despesas', controller.getMonthExpenseLog)
+routes.get('/api/despesa-id', controller.getExpenseLogById)
+routes.post('/api/despesas', controller.createExpenseLog)
 
-routes.post('/category', controller.createCategory)
+routes.post('/api/category', controller.createCategory)
 
-routes.post('/paymentType', controller.createPaymentType)
-
-routes.get('/test', async (req, res) => {
-    res.status(201).send("Teste de rota 1")
-})
-
-routes.get('/', async (req, res) => {
-    res.status(201).send("Teste de rota 2")
-})
+routes.post('/api/paymentType', controller.createPaymentType)
 
 const PORT = 4000;
 
