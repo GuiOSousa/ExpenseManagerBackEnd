@@ -18,9 +18,9 @@ async function seed() {
     ]
     
     const baseCategories = [
-        {"name": "Pagamento de Terceirizados", "description": "Pagamento realizado aos prestadores de serviço."},
-        {"name": "Pagamento de Terceirizados", "description": "Pagamento realizado aos prestadores de serviço."},
-        {"name": "Pagamento de Terceirizados", "description": "Pagamento realizado aos prestadores de serviço."}
+        {"name": "Alimentação", "description": "Dinheiro destinado aos gastos com alimentação."},
+        {"name": "Transporte", "description": "Dinheiro destinado aos gastos com transporte."},
+        {"name": "Lazer", "description": "Dinheiro destinado aos gastos com lazer."}
     ]
     
     for (const type of basePaymentTypes) {

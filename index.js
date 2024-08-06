@@ -14,7 +14,7 @@ routes.post('/api/category', controller.createCategory)
 
 routes.post('/api/paymentType', controller.createPaymentType)
 
-const PORT = 4000;
+const PORT = 3000;
 
 app.use(routes)
 

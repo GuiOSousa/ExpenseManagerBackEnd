@@ -1,10 +1,10 @@
 import { prisma } from './libs/prisma.js'
 
-class Repository {
+export class Repository {
     constructor(){}
 
     async getExpenseLogById(logId) {
-        return await prisma.expense.findFirst({
+        return await prisma.expense.findFirstOrThrow({
             where: {id: logId}
         })
     }

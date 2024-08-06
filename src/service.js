@@ -2,7 +2,7 @@ import repository from "./repository.js"
 import { startOfMonth, endOfMonth } from 'date-fns'
 import { InvalidIdError, DuplicateDataError } from "./errors/errors.js"
 
-class Service {
+export class Service {
     constructor(){}
 
     async getExpenseLogById(id) {
@@ -15,10 +15,11 @@ class Service {
 
     async createExpenseLog(expenseLogData) {
         const {value, date, description, paymentTypeId, categoryId} = expenseLogData
+
         if (await repository.getCategoryById(categoryId) == null || await repository.getPaymentTypeById(paymentTypeId) == null) {  
             throw new InvalidIdError
         }
-        
+
         return await repository.createExpenseLog({value, date, description, paymentTypeId, categoryId})
     }
 
