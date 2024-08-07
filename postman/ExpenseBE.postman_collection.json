@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"value\": 300.00,\r\n  \"date\": \"2024-#08-06T12:34:56Z\",\r\n  \"description\": \"Example expense 2\",\r\n  \"paymentTypeId\": 1,\r\n  \"categoryId\": 2\r\n}",
+					"raw": "{\r\n  \"value\": 300.00,\r\n  \"date\": \"2024-08-06T12:34:56Z\",\r\n  \"description\": \"Example expense 2\",\r\n  \"paymentTypeId\": 1,\r\n  \"categoryId\": 2\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -42,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Categoria 1\",\r\n    \"description\": \"Teste de categoria\"\r\n}",
+					"raw": "{\r\n    \"name\": \"TESTE\",\r\n    \"description\": \"Teste de categoria\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,6 +69,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"TESTE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:3000/api/paymentType",
 					"protocol": "http",
@@ -94,7 +103,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 5\r\n}",
+					"raw": "{\r\n    \"id\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

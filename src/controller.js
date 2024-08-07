@@ -1,6 +1,7 @@
 import {z} from 'zod'
 import service from './service.js'
 import { json } from 'stream/consumers'
+import { tr } from 'date-fns/locale'
 
 export class Controller {
     constructor(){}
@@ -11,9 +12,9 @@ export class Controller {
             const expenseLogData = bodySchema.parse(req.body)
             const expenseLog = await service.getExpenseLogById(expenseLogData.id)
     
-            res.status(200).send(expenseLog)
+            res.status(200).send({"data": expenseLog, "success": true})
         } catch(err) {
-            res.status(400).send(err.message)
+            res.status(400).send({"data": err.message, "success": false})
         }
     }
 
@@ -21,12 +22,12 @@ export class Controller {
         const monthExpenses = await service.getMonthExpenseLog()
         try {
             if (monthExpenses.length == 0) {
-                res.status(404).send("Nenhum registro encontrado.")
+                res.status(404).send({"data": "Nenhum registro encontrado", "success": true})
                 return
             }
-            res.status(200).send(monthExpenses)
+            res.status(200).send({"data": monthExpenses, "success": true})
         } catch(err) {
-            res.status(400).send(err.message)
+            res.status(400).send({"data": err.message, "success": false})
         }
     }
 
@@ -42,9 +43,9 @@ export class Controller {
             const expenseLogData = bodySchema.parse(req.body)
             const expenseLog = await service.createExpenseLog(expenseLogData)
 
-            res.status(201).send(`Registro ${expenseLog.id} realizado com sucesso.`)
+            res.status(201).send({"data": expenseLog.id, "success": true})
         } catch (err) {
-            res.status(400).send(err.message)
+            res.status(400).send({"data": err.message, "success": false})
           }
     }
 
@@ -57,9 +58,9 @@ export class Controller {
             const categoryData = bodySchema.parse(req.body)
             const category = await service.createCategory(categoryData)
 
-            res.status(201).send(`Categoria "${category.name}" criada com sucesso com ID: ${category.id}.`)
+            res.status(201).send({"data": category.id, "success": true})
         } catch(err) {
-            res.status(400).send(err.message)
+            res.status(400).send({"data": err.message, "success": false})
         }
     }
 
@@ -71,9 +72,9 @@ export class Controller {
             const paymentTypeData = bodySchema.parse(req.body)
             const paymentType = await service.createPaymentType(paymentTypeData)
 
-            res.status(201).send(`Tipo de pagamento "${paymentType.type}" criado com sucesso com ID: ${paymentType.id}.`)
+            res.status(201).send({"data": paymentType.id, "success": true})
         } catch(err) {
-            res.status(400).send(err.message)
+            res.status(400).send({"data": err.message, "success": false})
         }
     }
 }

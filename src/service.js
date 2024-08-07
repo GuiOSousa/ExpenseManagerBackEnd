@@ -25,7 +25,7 @@ export class Service {
 
     async createCategory(categoryData) {
         const {name, description} = categoryData
-        if (repository.getCategoryByName(name) != null) {
+        if (await repository.getCategoryByName(name) != null) {
             throw new DuplicateDataError
         }
 
@@ -34,7 +34,7 @@ export class Service {
 
     async createPaymentType(paymentTypeData) {
         const {type} = paymentTypeData
-        if (repository.getPaymentTypeByName(type) != null) {
+        if (await repository.getPaymentTypeByName(type) != null) {
             throw new DuplicateDataError
         }
 
